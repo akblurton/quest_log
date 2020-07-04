@@ -59,7 +59,45 @@ module.exports = (env, options) => {
             },
           ],
         },
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "babel-loader",
+            },
+            {
+              loader: "@svgr/webpack",
+              options: {
+                babel: false,
+                replaceAttrValues: {
+                  "#6c63ff": "currentColor",
+                },
+                dimensions: false,
+              },
+            },
+            {
+              loader: "url-loader",
+              options: {
+                limit: Math.pow(2, 13), // 8KB
+              },
+            },
+          ],
+        },
+        {
+          test: /\.(png|jpe?g|webp|mp4|webm|gif)$/,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: Math.pow(2, 13), // 8KB
+              },
+            },
+          ],
+        },
       ],
+    },
+    resolve: {
+      modules: ["node_modules", path.resolve(__dirname, "js"), __dirname],
     },
     plugins: [
       new MiniCssExtractPlugin({ filename: "css/[name].css?[contenthash]" }),
