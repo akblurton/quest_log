@@ -5,8 +5,13 @@ defmodule GameJournalWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :frontend do
+    plug Plug.Static, from: "priv/static", at: "/"
+  end
+
   scope "/api", GameJournalWeb do
     pipe_through :api
+    resources "/games", GameController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
@@ -23,5 +28,10 @@ defmodule GameJournalWeb.Router do
       pipe_through [:fetch_session, :protect_from_forgery]
       live_dashboard "/dashboard", metrics: GameJournalWeb.Telemetry
     end
+  end
+
+  scope "/", GameJournalWeb do
+    pipe_through :frontend
+    get "/*path", SpaController, :index
   end
 end

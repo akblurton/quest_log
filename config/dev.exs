@@ -5,7 +5,7 @@ config :game_journal, GameJournal.Repo,
   username: "postgres",
   password: "postgres",
   database: "game_journal_dev",
-  hostname: "localhost",
+  hostname: "postgres",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
