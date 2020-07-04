@@ -50,6 +50,9 @@ module.exports = (env, options) => {
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: devMode,
+              },
             },
             {
               loader: "css-loader",
