@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
 import React from "react";
-
-import Title from "./components/Typography/Title";
+import Root from "./components/Root";
 
 const main = document.querySelector("#app");
-ReactDOM.render(<Title>Video Game Journal</Title>, main);
+ReactDOM.render(<Root />, main);

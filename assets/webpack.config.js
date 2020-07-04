@@ -28,7 +28,7 @@ module.exports = (env, options) => {
       ],
     },
     entry: {
-      app: ["./js/main.js"],
+      app: ["reset.css/reset.css", "./js/main.js"],
     },
     output: {
       filename: devMode ? "js/[name].js" : "js/[name].js?[hash]",
@@ -44,6 +44,17 @@ module.exports = (env, options) => {
           use: {
             loader: "babel-loader",
           },
+        },
+        {
+          test: /\.css$/,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: "css-loader",
+            },
+          ],
         },
       ],
     },
