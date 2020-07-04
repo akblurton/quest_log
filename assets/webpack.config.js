@@ -59,7 +59,7 @@ module.exports = (env, options) => {
       ],
     },
     plugins: [
-      new MiniCssExtractPlugin({ filename: "css/app.css" }),
+      new MiniCssExtractPlugin({ filename: "css/[name].css?[contenthash]" }),
       new HtmlWebpackPlugin({
         title: "Video Game Journal (Title Pending)",
         template: "./html/index.ejs",
