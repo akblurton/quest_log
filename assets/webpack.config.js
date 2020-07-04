@@ -1,28 +1,39 @@
 /* eslint-env node */
 const path = require("path");
-const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env, options) => {
   const devMode = options.mode !== "production";
-
   return {
+    devServer: {
+      port: 8888,
+      compress: true,
+      hot: true,
+      host: "0.0.0.0",
+      hotOnly: true,
+      inline: true,
+      historyApiFallback: true,
+      proxy: {
+        "/api": "http://localhost:4000",
+        "/dashboard": "http://localhost:4000",
+      },
+    },
     optimization: {
       minimizer: [
         new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
-        new OptimizeCSSAssetsPlugin({})
-      ]
+        new OptimizeCSSAssetsPlugin({}),
+      ],
     },
     entry: {
-      "app": glob.sync("./vendor/**/*.js").concat(["./js/app.js"])
+      app: ["./js/main.js"],
     },
     output: {
-      filename: "[name].js",
-      path: path.resolve(__dirname, "../priv/static/js"),
-      publicPath: "/js/"
+      filename: devMode ? "js/[name].js" : "js/[name].js?[hash]",
+      path: path.resolve(__dirname, "../priv/static/"),
+      publicPath: "/",
     },
     devtool: devMode ? "source-map" : undefined,
     module: {
@@ -31,22 +42,17 @@ module.exports = (env, options) => {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
-          }
+            loader: "babel-loader",
+          },
         },
-        {
-          test: /\.[s]?css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            "css-loader",
-            "sass-loader",
-          ],
-        }
-      ]
+      ],
     },
     plugins: [
-      new MiniCssExtractPlugin({ filename: "../css/app.css" }),
-      new CopyWebpackPlugin([{ from: "static/", to: "../" }])
-    ]
+      new MiniCssExtractPlugin({ filename: "css/app.css" }),
+      new HtmlWebpackPlugin({
+        title: "Video Game Journal (Title Pending)",
+        template: "./html/index.ejs",
+      }),
+    ],
   };
 };
