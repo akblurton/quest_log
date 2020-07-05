@@ -19,7 +19,9 @@ const LoadingBG = styled.div`
   left: 5px;
 `;
 
-const Root = styled.div`
+const Root = styled.div.withConfig({
+  shouldForwardProp: () => false,
+})`
   display: block;
   position: fixed;
   bottom: 20px;
@@ -70,7 +72,7 @@ const NetworkLoader = ({ on, ...props }) => {
     } else {
       elapsed.current = Math.min(OFF_DURATION, elapsed.current + dt);
       const change = (location.current * elapsed.current) / OFF_DURATION;
-      setProgress(location.current - change);
+      setProgress(Math.round(location.current - change));
     }
   });
   return (
