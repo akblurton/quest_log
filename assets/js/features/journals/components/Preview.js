@@ -70,11 +70,11 @@ for (const file of examples.keys()) {
 
 let available = [...opts];
 function getRandomImage() {
+  if (!available.length) {
+    available = [...opts];
+  }
   const index = Math.floor(Math.random() * available.length);
   const [media] = available.splice(index, 1);
-  if (!available.length) {
-    available.length = [...opts];
-  }
   return media;
 }
 
