@@ -13,6 +13,7 @@
     "phoenix": "file:../deps/phoenix",
     "react": "^16.13.1",
     "react-dom": "npm:@hot-loader/react-dom",
+    "react-feather": "^2.0.8",
     "react-hot-loader": "^4.12.21",
     "react-is": "^16.13.1",
     "react-loading-skeleton": "^2.1.1",

@@ -1,0 +1,13 @@
+/* global module */
+module.exports = {
+  presets: [["@babel/preset-env", { modules: false }], "@babel/preset-react"],
+  plugins: [
+    [
+      "babel-plugin-styled-components",
+      {
+        ssr: false,
+        displayName: false,
+      },
+    ],
+  ],
+};

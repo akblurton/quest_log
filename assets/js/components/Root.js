@@ -7,7 +7,7 @@ import store from "../store";
 
 import Style from "../style/css";
 import SkeletonTheme from "../style/skeleton";
-import Title from "./Typography/Title";
+import Logo from "./Branding/Logo";
 import Router from "./Router";
 import useLocalStorage from "hooks/localStorage";
 
@@ -22,7 +22,7 @@ const Root = () => {
         <Provider store={store}>
           <button onClick={() => setDark((d) => !d)}>Change Theme</button>
           <Style />
-          <Title>Video Game Journal</Title>
+          <Logo>Video Game Journal</Logo>
           <Router />
         </Provider>
       </SkeletonTheme>

@@ -3,9 +3,15 @@ import styled from "styled-components";
 import Panel from "components/layout/Panel";
 import Skeleton from "react-loading-skeleton";
 import RandomIllustration from "components/Illustration/Random";
+import BlockLink from "components/UI/BlockLink";
+
+import * as theme from "style/theme";
 
 const StyledPanel = styled(Panel)`
-  min-height: 400px;
+  /* height: 440px; */
+  display: flex;
+  flex-direction: column;
+
   & h2 {
     font-size: 32px;
   }
@@ -14,6 +20,7 @@ const StyledPanel = styled(Panel)`
     font-size: 13px;
     display: block;
     margin-bottom: 16px;
+    color: ${theme.secondary};
   }
 
   & p {
@@ -23,6 +30,11 @@ const StyledPanel = styled(Panel)`
     -webkit-box-orient: vertical;
     /* stylelint-enable */
     overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  & a {
+    margin-top: auto;
   }
 `;
 
@@ -30,8 +42,11 @@ const Picture = styled.div`
   overflow: hidden;
   border-radius: 4px;
   width: 100%;
-  height: 200px;
-  background: rgba(0, 0, 0, 0.05);
+  height: 0;
+  min-height: 0;
+  box-sizing: content-box;
+  padding-top: 70%;
+  background: ${theme.skeleton};
   margin-bottom: 16px;
   position: relative;
 
@@ -76,6 +91,9 @@ const Preview = () => {
           <Skeleton count={5} />
         )}
       </p>
+      <BlockLink to="/">
+        {loaded ? "Read More" : <Skeleton width={"15%"} />}
+      </BlockLink>
     </StyledPanel>
   );
 };
