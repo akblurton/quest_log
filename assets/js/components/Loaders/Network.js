@@ -20,12 +20,12 @@ const LoadingBG = styled.div`
 `;
 
 const Root = styled.div.withConfig({
-  shouldForwardProp: () => false,
+  shouldForwardProp: (prop) => prop === "children",
 })`
   display: block;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   width: 7vmin;
   height: 7vmin;
   min-width: 100px;
