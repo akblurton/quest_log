@@ -8,7 +8,9 @@ import store from "../store";
 import Style from "../style/css";
 import SkeletonTheme from "../style/Skeleton";
 import Logo from "./Branding/Logo";
+import DarkModeToggle from "./UI/DarkModeToggle";
 import Router from "./Router";
+
 import useLocalStorage from "hooks/localStorage";
 
 const Root = () => {
@@ -16,11 +18,12 @@ const Root = () => {
     "dark_mode",
     () => !!window.matchMedia("(prefers-color-scheme: dark)").matches
   );
+
   return (
     <ThemeProvider theme={{ mode: dark ? "dark" : "light" }}>
       <SkeletonTheme>
         <Provider store={store}>
-          <button onClick={() => setDark((d) => !d)}>Change Theme</button>
+          <DarkModeToggle dark={dark} onChange={setDark} />
           <Style />
           <Logo>Video Game Journal</Logo>
           <Router />
