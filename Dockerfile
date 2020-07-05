@@ -32,7 +32,7 @@ RUN chmod +x ./wait-for-it.sh
 WORKDIR /app
 COPY --from=dev /app/_build .
 COPY run.sh ./
-
+RUN chmod +x ./run.sh
 
 # Run the Phoenix app
 EXPOSE 4000
