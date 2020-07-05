@@ -6,7 +6,7 @@ defmodule GameJournalWeb.Router do
   end
 
   pipeline :frontend do
-    plug Plug.Static, from: "priv/static", at: "/"
+    plug Plug.Static, from: {:game_journal, "priv/static"}, at: "/static"
   end
 
   scope "/api", GameJournalWeb do

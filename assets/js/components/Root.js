@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "../store";
 
 import Style from "../style/css";
-import SkeletonTheme from "../style/skeleton";
+import SkeletonTheme from "../style/Skeleton";
 import Logo from "./Branding/Logo";
 import Router from "./Router";
 import useLocalStorage from "hooks/localStorage";

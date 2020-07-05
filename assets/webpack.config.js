@@ -1,9 +1,11 @@
 /* eslint-env node */
 const path = require("path");
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 
 module.exports = (env, options) => {
   const devMode = options.mode !== "production";
@@ -90,6 +92,7 @@ module.exports = (env, options) => {
               loader: "url-loader",
               options: {
                 limit: Math.pow(2, 13), // 8KB
+                publicPath: devMode ? "/" : "/static",
               },
             },
           ],
@@ -100,10 +103,14 @@ module.exports = (env, options) => {
       modules: ["node_modules", path.resolve(__dirname, "js"), __dirname],
     },
     plugins: [
+      new CaseSensitivePathsPlugin(),
       new MiniCssExtractPlugin({ filename: "css/[name].css?[contenthash]" }),
       new HtmlWebpackPlugin({
         title: "Video Game Journal (Title Pending)",
         template: "./html/index.ejs",
+      }),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: "development",
       }),
     ],
   };

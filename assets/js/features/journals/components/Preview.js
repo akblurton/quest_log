@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Panel from "components/layout/Panel";
+import Panel from "components/Layout/Panel";
 import Skeleton from "react-loading-skeleton";
-import RandomIllustration from "components/Illustration/Random";
 import BlockLink from "components/UI/BlockLink";
 
 import * as theme from "style/theme";
@@ -52,35 +51,56 @@ const Picture = styled.div`
 
   & > * {
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    width: calc(100% - 30px);
-    height: calc(100% - 30px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
+/* global require */
+const examples = require.context("static/examples", false, /\.webm|jpg$/);
+const opts = [];
+for (const file of examples.keys()) {
+  opts.push(examples(file).default);
+}
+
+let available = [...opts];
+function getRandomImage() {
+  const index = Math.floor(Math.random() * available.length);
+  const [media] = available.splice(index, 1);
+  if (!available.length) {
+    available.length = [...opts];
+  }
+  return media;
+}
+
 const Preview = () => {
   const [loaded, setLoaded] = useState(false);
+  const [img] = useState(getRandomImage);
   useEffect(() => {
-    const rand = Math.floor(2500 + Math.random() * 5000);
-    console.log("Loading in", rand, "ms");
+    const rand = Math.floor(300 + Math.random() * 2300);
     const id = setTimeout(setLoaded, rand, true);
     return () => clearTimeout(id);
   }, []);
+  const isVideo = /\.webm/.test(img);
   return (
     <StyledPanel>
       <Picture>
-        <RandomIllustration
-          choices={[
-            "arcade",
-            "game_night",
-            "game_world",
-            "gaming",
-            "player_select",
-          ]}
-        />
+        {isVideo ? (
+          <video
+            src={img}
+            loop={true}
+            autoPlay={true}
+            muted={true}
+            controls={false}
+          />
+        ) : (
+          <img src={img} />
+        )}
       </Picture>
       <h2>{loaded ? "Title" : <Skeleton width="50%" />}</h2>
       <time>{loaded ? "10th August 2020" : <Skeleton width="30%" />}</time>

@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :game_journal,
   ecto_repos: [GameJournal.Repo]

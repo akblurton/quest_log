@@ -1,0 +1,6 @@
+assets/node_modules
+priv/static
+_deps
+_build
+.elixir_ls
+Dockerfile
