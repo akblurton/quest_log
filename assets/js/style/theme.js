@@ -4,6 +4,10 @@ export const background = theme("mode", {
   light: "#a8aaaa",
   dark: "#111111",
 });
+export const backgroundAlt = theme("mode", {
+  light: "#989a9a",
+  dark: "#222222",
+});
 export const foreground = theme("mode", {
   light: "#080907",
   dark: "#C1BED1",

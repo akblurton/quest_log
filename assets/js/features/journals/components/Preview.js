@@ -30,6 +30,7 @@ const StyledPanel = styled(Panel)`
     /* stylelint-enable */
     overflow: hidden;
     margin-bottom: 16px;
+    height: 110px;
   }
 
   & a {
