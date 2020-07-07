@@ -1,4 +1,4 @@
-defmodule AdventureLog.Journal.User do
+defmodule AdventureLog.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Argon2
