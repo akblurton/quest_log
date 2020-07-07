@@ -1,4 +1,4 @@
-defmodule GameJournalWeb.Telemetry do
+defmodule AdventureLogWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -49,7 +49,7 @@ defmodule GameJournalWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {GameJournalWeb, :count_users, []}
+      # {AdventureLogWeb, :count_users, []}
     ]
   end
 end

@@ -1,15 +1,15 @@
-defmodule GameJournalWeb.Router do
-  use GameJournalWeb, :router
+defmodule AdventureLogWeb.Router do
+  use AdventureLogWeb, :router
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   pipeline :frontend do
-    plug Plug.Static, from: {:game_journal, "priv/static"}, at: "/static"
+    plug Plug.Static, from: {:adventure_log, "priv/static"}, at: "/static"
   end
 
-  scope "/api", GameJournalWeb do
+  scope "/api", AdventureLogWeb do
     pipe_through :api
     resources "/games", GameController, except: [:new, :edit]
   end
@@ -26,11 +26,11 @@ defmodule GameJournalWeb.Router do
 
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
-      live_dashboard "/dashboard", metrics: GameJournalWeb.Telemetry
+      live_dashboard "/dashboard", metrics: AdventureLogWeb.Telemetry
     end
   end
 
-  scope "/", GameJournalWeb do
+  scope "/", AdventureLogWeb do
     pipe_through :frontend
     get "/*path", SpaController, :index
   end

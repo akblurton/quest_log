@@ -1,12 +1,12 @@
-defmodule GameJournal.Journal do
+defmodule AdventureLog.Journal do
   @moduledoc """
   The Journal context.
   """
 
   import Ecto.Query, warn: false
-  alias GameJournal.Repo
+  alias AdventureLog.Repo
 
-  alias GameJournal.Journal.User
+  alias AdventureLog.Journal.User
 
   @doc """
   Returns the list of users.
@@ -102,7 +102,7 @@ defmodule GameJournal.Journal do
     User.changeset(user, attrs)
   end
 
-  alias GameJournal.Journal.Entry
+  alias AdventureLog.Journal.Entry
 
   @doc """
   Returns the list of entries.

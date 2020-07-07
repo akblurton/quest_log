@@ -1,4 +1,4 @@
-defmodule GameJournal.Journal.User do
+defmodule AdventureLog.Journal.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Argon2
@@ -20,8 +20,11 @@ defmodule GameJournal.Journal.User do
     |> unique_constraint(:email)
   end
 
-  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+  defp put_password_hash(
+         %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
+       ) do
     change(changeset, password: Argon2.hash_pwd_salt(password))
   end
+
   defp put_password_hash(changeset), do: changeset
 end

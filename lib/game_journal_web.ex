@@ -1,12 +1,12 @@
-defmodule GameJournalWeb do
+defmodule AdventureLogWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use GameJournalWeb, :controller
-      use GameJournalWeb, :view
+      use AdventureLogWeb, :controller
+      use AdventureLogWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,11 +19,11 @@ defmodule GameJournalWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: GameJournalWeb
+      use Phoenix.Controller, namespace: AdventureLogWeb
 
       import Plug.Conn
-      import GameJournalWeb.Gettext
-      alias GameJournalWeb.Router.Helpers, as: Routes
+      import AdventureLogWeb.Gettext
+      alias AdventureLogWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -31,7 +31,7 @@ defmodule GameJournalWeb do
     quote do
       use Phoenix.View,
         root: "lib/game_journal_web/templates",
-        namespace: GameJournalWeb
+        namespace: AdventureLogWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -54,7 +54,7 @@ defmodule GameJournalWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import GameJournalWeb.Gettext
+      import AdventureLogWeb.Gettext
     end
   end
 
@@ -63,9 +63,9 @@ defmodule GameJournalWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import GameJournalWeb.ErrorHelpers
-      import GameJournalWeb.Gettext
-      alias GameJournalWeb.Router.Helpers, as: Routes
+      import AdventureLogWeb.ErrorHelpers
+      import AdventureLogWeb.Gettext
+      alias AdventureLogWeb.Router.Helpers, as: Routes
     end
   end
 

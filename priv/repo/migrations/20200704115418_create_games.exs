@@ -1,4 +1,4 @@
-defmodule GameJournal.Repo.Migrations.CreateGames do
+defmodule AdventureLog.Repo.Migrations.CreateGames do
   use Ecto.Migration
 
   def change do
@@ -9,6 +9,5 @@ defmodule GameJournal.Repo.Migrations.CreateGames do
 
       timestamps()
     end
-
   end
 end

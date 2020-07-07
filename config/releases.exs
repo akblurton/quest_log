@@ -28,7 +28,7 @@ database =
     environment variable DATABASE_NAME is missing.
     """
 
-config :game_journal, GameJournal.Repo,
+config :adventure_log, AdventureLog.Repo,
   # ssl: true,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   username: username,
@@ -44,9 +44,9 @@ secret_key_base =
     """
 
 host = System.get_env("HOST") || "localhost"
-config :game_journal, GameJournalWeb.Endpoint, url: [host: host]
+config :adventure_log, AdventureLogWeb.Endpoint, url: [host: host]
 
-config :game_journal, GameJournalWeb.Endpoint,
+config :adventure_log, AdventureLogWeb.Endpoint,
   http: [
     port: String.to_integer(System.get_env("PORT") || "4000"),
     transport_options: [socket_opts: [:inet6]]
@@ -58,7 +58,7 @@ config :game_journal, GameJournalWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :game_journal, GameJournalWeb.Endpoint, server: true
+#     config :adventure_log, AdventureLogWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.

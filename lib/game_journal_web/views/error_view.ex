@@ -1,5 +1,5 @@
-defmodule GameJournalWeb.ErrorView do
-  use GameJournalWeb, :view
+defmodule AdventureLogWeb.ErrorView do
+  use AdventureLogWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

@@ -1,13 +1,17 @@
-defmodule GameJournal.PlayersTest do
-  use GameJournal.DataCase
+defmodule AdventureLog.PlayersTest do
+  use AdventureLog.DataCase
 
-  alias GameJournal.Players
+  alias AdventureLog.Players
 
   describe "users" do
-    alias GameJournal.Players.User
+    alias AdventureLog.Players.User
 
     @valid_attrs %{email: "some email", name: "some name", password: "some password"}
-    @update_attrs %{email: "some updated email", name: "some updated name", password: "some updated password"}
+    @update_attrs %{
+      email: "some updated email",
+      name: "some updated name",
+      password: "some updated password"
+    }
     @invalid_attrs %{email: nil, name: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do

@@ -1,5 +1,5 @@
-defmodule GameJournalWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :game_journal
+defmodule AdventureLogWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :adventure_log
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -10,7 +10,7 @@ defmodule GameJournalWeb.Endpoint do
     signing_salt: "tO7jHToO"
   ]
 
-  socket "/socket", GameJournalWeb.UserSocket,
+  socket "/socket", AdventureLogWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -22,7 +22,7 @@ defmodule GameJournalWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :game_journal,
+    from: :adventure_log,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -30,7 +30,7 @@ defmodule GameJournalWeb.Endpoint do
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :game_journal
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :adventure_log
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
@@ -48,5 +48,5 @@ defmodule GameJournalWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug GameJournalWeb.Router
+  plug AdventureLogWeb.Router
 end

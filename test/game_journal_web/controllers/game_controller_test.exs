@@ -1,8 +1,8 @@
-defmodule GameJournalWeb.GameControllerTest do
-  use GameJournalWeb.ConnCase
+defmodule AdventureLogWeb.GameControllerTest do
+  use AdventureLogWeb.ConnCase
 
-  alias GameJournal.Library
-  alias GameJournal.Library.Game
+  alias AdventureLog.Library
+  alias AdventureLog.Library.Game
 
   @create_attrs %{
     name: "some name",

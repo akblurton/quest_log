@@ -1,11 +1,11 @@
-defmodule GameJournalWeb.ChangesetView do
-  use GameJournalWeb, :view
+defmodule AdventureLogWeb.ChangesetView do
+  use AdventureLogWeb, :view
 
   @doc """
   Traverses and translates changeset errors.
 
   See `Ecto.Changeset.traverse_errors/2` and
-  `GameJournalWeb.ErrorHelpers.translate_error/1` for more details.
+  `AdventureLogWeb.ErrorHelpers.translate_error/1` for more details.
   """
   def translate_errors(changeset) do
     Ecto.Changeset.traverse_errors(changeset, &translate_error/1)

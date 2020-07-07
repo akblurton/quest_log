@@ -1,5 +1,5 @@
-defmodule GameJournal.Release do
-  @app :game_journal
+defmodule AdventureLog.Release do
+  @app :adventure_log
 
   def migrate do
     load_app()

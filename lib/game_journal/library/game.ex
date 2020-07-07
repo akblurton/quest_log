@@ -1,4 +1,4 @@
-defmodule GameJournal.Library.Game do
+defmodule AdventureLog.Library.Game do
   use Ecto.Schema
   import Ecto.Changeset
 

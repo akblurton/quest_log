@@ -1,7 +1,7 @@
 import Config
 
 # Configure your database
-config :game_journal, GameJournal.Repo,
+config :adventure_log, AdventureLog.Repo,
   username: "postgres",
   password: "postgres",
   database: "game_journal_dev",
@@ -15,7 +15,7 @@ config :game_journal, GameJournal.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :game_journal, GameJournalWeb.Endpoint,
+config :adventure_log, AdventureLogWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,

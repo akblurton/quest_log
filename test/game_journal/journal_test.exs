@@ -1,13 +1,17 @@
-defmodule GameJournal.JournalTest do
-  use GameJournal.DataCase
+defmodule AdventureLog.JournalTest do
+  use AdventureLog.DataCase
 
-  alias GameJournal.Journal
+  alias AdventureLog.Journal
 
   describe "users" do
-    alias GameJournal.Journal.User
+    alias AdventureLog.Journal.User
 
     @valid_attrs %{email: "some email", name: "some name", password: "some password"}
-    @update_attrs %{email: "some updated email", name: "some updated name", password: "some updated password"}
+    @update_attrs %{
+      email: "some updated email",
+      name: "some updated name",
+      password: "some updated password"
+    }
     @invalid_attrs %{email: nil, name: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -67,10 +71,14 @@ defmodule GameJournal.JournalTest do
   end
 
   describe "entries" do
-    alias GameJournal.Journal.Entry
+    alias AdventureLog.Journal.Entry
 
     @valid_attrs %{summary: "some summary", title: "some title", whats_next: "some whats_next"}
-    @update_attrs %{summary: "some updated summary", title: "some updated title", whats_next: "some updated whats_next"}
+    @update_attrs %{
+      summary: "some updated summary",
+      title: "some updated title",
+      whats_next: "some updated whats_next"
+    }
     @invalid_attrs %{summary: nil, title: nil, whats_next: nil}
 
     def entry_fixture(attrs \\ %{}) do

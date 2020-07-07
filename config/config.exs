@@ -7,15 +7,15 @@
 # General application configuration
 import Config
 
-config :game_journal,
-  ecto_repos: [GameJournal.Repo]
+config :adventure_log,
+  ecto_repos: [AdventureLog.Repo]
 
 # Configures the endpoint
-config :game_journal, GameJournalWeb.Endpoint,
+config :adventure_log, AdventureLogWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "wFrQPC0sJ4uk503T6A/fVqE7u6rQlomabb8T1m6ovI3whOV8O0N4XTOLxKIgdsSW",
-  render_errors: [view: GameJournalWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: GameJournal.PubSub,
+  render_errors: [view: AdventureLogWeb.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: AdventureLog.PubSub,
   live_view: [signing_salt: "e0w5rcKe"]
 
 # Configures Elixir's Logger

@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(GameJournal.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(AdventureLog.Repo, :manual)

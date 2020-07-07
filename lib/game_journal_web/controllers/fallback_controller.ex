@@ -1,16 +1,16 @@
-defmodule GameJournalWeb.FallbackController do
+defmodule AdventureLogWeb.FallbackController do
   @moduledoc """
   Translates controller action results into valid `Plug.Conn` responses.
 
   See `Phoenix.Controller.action_fallback/1` for more details.
   """
-  use GameJournalWeb, :controller
+  use AdventureLogWeb, :controller
 
   # This clause handles errors returned by Ecto's insert/update/delete.
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> put_view(GameJournalWeb.ChangesetView)
+    |> put_view(AdventureLogWeb.ChangesetView)
     |> render("error.json", changeset: changeset)
   end
 
@@ -18,7 +18,7 @@ defmodule GameJournalWeb.FallbackController do
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> put_view(GameJournalWeb.ErrorView)
+    |> put_view(AdventureLogWeb.ErrorView)
     |> render(:"404")
   end
 end

@@ -1,12 +1,12 @@
-defmodule GameJournal.Library do
+defmodule AdventureLog.Library do
   @moduledoc """
   The Library context.
   """
 
   import Ecto.Query, warn: false
-  alias GameJournal.Repo
+  alias AdventureLog.Repo
 
-  alias GameJournal.Library.Game
+  alias AdventureLog.Library.Game
 
   @doc """
   Returns the list of games.

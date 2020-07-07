@@ -1,4 +1,4 @@
-defmodule GameJournal.Repo.Migrations.CreateEntries do
+defmodule AdventureLog.Repo.Migrations.CreateEntries do
   use Ecto.Migration
 
   def change do

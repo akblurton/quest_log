@@ -1,9 +1,9 @@
-defmodule GameJournal.MixProject do
+defmodule AdventureLog.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :game_journal,
+      app: :adventure_log,
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule GameJournal.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {GameJournal.Application, []},
+      mod: {AdventureLog.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

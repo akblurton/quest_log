@@ -1,10 +1,10 @@
-defmodule GameJournalWeb.GameController do
-  use GameJournalWeb, :controller
+defmodule AdventureLogWeb.GameController do
+  use AdventureLogWeb, :controller
 
-  alias GameJournal.Library
-  alias GameJournal.Library.Game
+  alias AdventureLog.Library
+  alias AdventureLog.Library.Game
 
-  action_fallback GameJournalWeb.FallbackController
+  action_fallback AdventureLogWeb.FallbackController
 
   def index(conn, _params) do
     games = Library.list_games()

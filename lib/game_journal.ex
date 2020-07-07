@@ -1,6 +1,6 @@
-defmodule GameJournal do
+defmodule AdventureLog do
   @moduledoc """
-  GameJournal keeps the contexts that define your domain
+  AdventureLog keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

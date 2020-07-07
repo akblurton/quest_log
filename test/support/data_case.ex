@@ -1,4 +1,4 @@
-defmodule GameJournal.DataCase do
+defmodule AdventureLog.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule GameJournal.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use GameJournal.DataCase, async: true`, although
+  by setting `use AdventureLog.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,20 +18,20 @@ defmodule GameJournal.DataCase do
 
   using do
     quote do
-      alias GameJournal.Repo
+      alias AdventureLog.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import GameJournal.DataCase
+      import AdventureLog.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GameJournal.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AdventureLog.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(GameJournal.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(AdventureLog.Repo, {:shared, self()})
     end
 
     :ok

@@ -1,4 +1,4 @@
-defmodule GameJournalWeb.ChannelCase do
+defmodule AdventureLogWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule GameJournalWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use GameJournalWeb.ChannelCase, async: true`, although
+  by setting `use AdventureLogWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,18 +21,18 @@ defmodule GameJournalWeb.ChannelCase do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
-      import GameJournalWeb.ChannelCase
+      import AdventureLogWeb.ChannelCase
 
       # The default endpoint for testing
-      @endpoint GameJournalWeb.Endpoint
+      @endpoint AdventureLogWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GameJournal.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AdventureLog.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(GameJournal.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(AdventureLog.Repo, {:shared, self()})
     end
 
     :ok

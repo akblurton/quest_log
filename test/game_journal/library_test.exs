@@ -1,10 +1,10 @@
-defmodule GameJournal.LibraryTest do
-  use GameJournal.DataCase
+defmodule AdventureLog.LibraryTest do
+  use AdventureLog.DataCase
 
-  alias GameJournal.Library
+  alias AdventureLog.Library
 
   describe "games" do
-    alias GameJournal.Library.Game
+    alias AdventureLog.Library.Game
 
     @valid_attrs %{name: "some name", platform: 42, release_date: ~D[2010-04-17]}
     @update_attrs %{name: "some updated name", platform: 43, release_date: ~D[2011-05-18]}
