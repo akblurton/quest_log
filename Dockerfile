@@ -1,4 +1,5 @@
 FROM bitwalker/alpine-elixir-phoenix:1.10.3 as dev
+RUN apk add --no-cache make gcc libc-dev
 RUN mix local.hex --force
 RUN mix local.rebar --force
 RUN npm i -g yarn

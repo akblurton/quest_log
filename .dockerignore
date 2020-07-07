@@ -1,6 +1,6 @@
 assets/node_modules
 priv/static
-_deps
+deps
 _build
 .elixir_ls
 Dockerfile

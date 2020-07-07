@@ -5,7 +5,7 @@ config :adventure_log, AdventureLog.Repo,
   username: "postgres",
   password: "postgres",
   database: "game_journal_dev",
-  hostname: "postgres",
+  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
