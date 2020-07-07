@@ -1,14 +1,13 @@
 version: "3.3"
 services:
-  webapp:
+  app:
     image: bitwalker/alpine-elixir-phoenix:1.10.3
     ports:
       - 8888:8888
     depends_on:
       - postgres
     volumes:
-      - ./:/app
-    entrypoint: "/app/dev.sh"
+      - ./:/opt/app
   postgres:
     image: postgres
     volumes:
