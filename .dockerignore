@@ -1,6 +1,10 @@
-assets/node_modules
-priv/static
-deps
-_build
-.elixir_ls
+web/node_modules
+api/priv/static
+api/deps
+api/_build
+api/.elixir_ls
 Dockerfile
+.eslintcache
+.stylelintcache
+.env
+.git

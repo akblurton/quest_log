@@ -34,7 +34,7 @@ module.exports = (env, options) => {
     },
     output: {
       filename: devMode ? "js/[name].js" : "js/[name].js?[hash]",
-      path: path.resolve(__dirname, "../priv/static/"),
+      path: path.resolve(__dirname, "../api/priv/static/"),
       publicPath: "/",
     },
     devtool: devMode ? "source-map" : undefined,

@@ -10,7 +10,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
     "html-webpack-plugin": "^4.3.0",
-    "phoenix": "file:../deps/phoenix",
     "react": "^16.13.1",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-feather": "^2.0.8",
