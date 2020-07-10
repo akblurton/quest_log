@@ -1,7 +1,7 @@
 {
   "repository": {},
   "description": " ",
-  "license": "MIT",
+  "license": "CC-BY-SA-4.0",
   "scripts": {
     "deploy": "webpack --mode production",
     "watch": "webpack-dev-server --mode development",
