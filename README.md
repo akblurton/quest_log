@@ -1,4 +1,4 @@
-# AdventureLog
+# QuestLog
 
 To start your Phoenix server:
 

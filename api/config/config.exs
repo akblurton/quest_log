@@ -7,15 +7,15 @@
 # General application configuration
 import Config
 
-config :adventure_log,
-  ecto_repos: [AdventureLog.Repo]
+config :quest_log,
+  ecto_repos: [QuestLog.Repo]
 
 # Configures the endpoint
-config :adventure_log, AdventureLogWeb.Endpoint,
+config :quest_log, QuestLogWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "wFrQPC0sJ4uk503T6A/fVqE7u6rQlomabb8T1m6ovI3whOV8O0N4XTOLxKIgdsSW",
-  render_errors: [view: AdventureLogWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: AdventureLog.PubSub,
+  render_errors: [view: QuestLogWeb.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: QuestLog.PubSub,
   live_view: [signing_salt: "e0w5rcKe"]
 
 # Configures Elixir's Logger
@@ -26,8 +26,8 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :adventure_log, MyApp.Guardian,
-  issuer: "adventure_log",
+config :quest_log, MyApp.Guardian,
+  issuer: "quest_log",
   secret_key: "5Msf7nJjLq2ot98Wd/e8OCYjZG+6ttgnZtEBJhlERMKQpb+YDogOApeFXMup8ggR"
 
 # Import environment specific config. This must remain at the bottom

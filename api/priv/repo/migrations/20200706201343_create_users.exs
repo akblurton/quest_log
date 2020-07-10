@@ -1,4 +1,4 @@
-defmodule AdventureLog.Repo.Migrations.CreateUsers do
+defmodule QuestLog.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
