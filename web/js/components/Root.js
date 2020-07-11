@@ -1,6 +1,5 @@
 import React from "react";
-import { hot } from "react-hot-loader/root";
-
+import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 import store from "../store";
@@ -13,10 +12,12 @@ import Router from "./Router";
 
 import useLocalStorage from "hooks/localStorage";
 
-const Root = () => {
+const Root = ({ Router: R }) => {
   const [dark, setDark] = useLocalStorage(
     "dark_mode",
-    () => !!window.matchMedia("(prefers-color-scheme: dark)").matches
+    () =>
+      global.matchMedia &&
+      !!global.matchMedia("(prefers-color-scheme: dark)").matches
   );
 
   return (
@@ -26,11 +27,15 @@ const Root = () => {
           <DarkModeToggle dark={dark} onChange={setDark} />
           <Style />
           <Logo>Video Game Journal</Logo>
-          <Router />
+          <Router Router={R} />
         </Provider>
       </SkeletonTheme>
     </ThemeProvider>
   );
 };
 
-export default hot(Root);
+Root.propTypes = {
+  Router: PropTypes.func,
+};
+
+export default Root;

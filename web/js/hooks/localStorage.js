@@ -11,7 +11,7 @@ function getValue(value, ...args) {
 const useLocalStorage = (key, defaultValue) => {
   const [value, setValue] = useState(() => {
     try {
-      const current = window.localStorage.getItem(key);
+      const current = global.localStorage.getItem(key);
       if (current) {
         return JSON.parse(current);
       } else {
@@ -25,7 +25,7 @@ const useLocalStorage = (key, defaultValue) => {
   const setStorageValue = useCallback(
     (newValue) => {
       try {
-        window.localStorage.setItem(
+        global.localStorage.setItem(
           key,
           JSON.stringify(getValue(newValue, value))
         );

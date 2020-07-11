@@ -62,7 +62,7 @@ const Sprite = styled.div`
 const Home = () => {
   return (
     <>
-      <Title>I&apos;m home!</Title>
+      <Title>I&apos;m home</Title>
       <Walker>
         <Sprite size={1} image={healer_f} />
         <Sprite size={1} image={healer_m} />

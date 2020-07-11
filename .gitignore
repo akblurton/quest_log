@@ -29,6 +29,7 @@ game_journal-*.tar
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
 /api/priv/static/
+/web/dist/
 
 # Cache files
 .eslintcache

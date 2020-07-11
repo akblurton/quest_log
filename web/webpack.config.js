@@ -4,25 +4,17 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
+const DashboardPlugin = require("webpack-dashboard/plugin");
+const LoadablePlugin = require("@loadable/webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = (env, options) => {
   const devMode = options.mode !== "production";
-  return {
-    devServer: {
-      port: 8888,
-      compress: true,
-      hot: true,
-      host: "0.0.0.0",
-      hotOnly: true,
-      inline: true,
-      historyApiFallback: true,
-      proxy: {
-        "/api": "http://localhost:4000",
-        "/dashboard": "http://localhost:4000",
-      },
-    },
+  const createConfig = (target) => ({
+    mode: devMode ? "development" : "production",
+    name: target,
     optimization: {
       minimizer: [
         new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
@@ -30,14 +22,15 @@ module.exports = (env, options) => {
       ],
     },
     entry: {
-      app: ["reset.css/reset.css", "./js/main.js"],
+      main: [`./js/${target}.js`],
     },
     output: {
-      filename: devMode ? "js/[name].js" : "js/[name].js?[hash]",
-      path: path.resolve(__dirname, "../api/priv/static/"),
-      publicPath: "/",
+      filename: devMode ? "[name].js" : "[name].js?[hash]",
+      path: path.resolve(__dirname, "dist", target),
+      publicPath: `/dist/${target}/`,
+      ...(target === "web" ? {} : { libraryTarget: "commonjs2" }),
     },
-    devtool: devMode ? "source-map" : undefined,
+    devtool: devMode || target === "node" ? "source-map" : undefined,
     module: {
       rules: [
         {
@@ -45,6 +38,9 @@ module.exports = (env, options) => {
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
+            options: {
+              caller: { target },
+            },
           },
         },
         {
@@ -92,7 +88,8 @@ module.exports = (env, options) => {
               loader: "url-loader",
               options: {
                 limit: Math.pow(2, 13), // 8KB
-                publicPath: devMode ? "/" : "/static",
+                publicPath: "/dist/web/",
+                emitFile: target === "web",
               },
             },
           ],
@@ -105,13 +102,23 @@ module.exports = (env, options) => {
     plugins: [
       new CaseSensitivePathsPlugin(),
       new MiniCssExtractPlugin({ filename: "css/[name].css?[contenthash]" }),
-      new HtmlWebpackPlugin({
-        title: "Video Game Journal (Title Pending)",
-        template: "./html/index.ejs",
-      }),
       new webpack.EnvironmentPlugin({
         NODE_ENV: "development",
       }),
-    ],
-  };
+      target === "web" && new webpack.HotModuleReplacementPlugin(),
+      devMode && new DashboardPlugin({ port: 3001 }),
+      devMode &&
+        target === "web" &&
+        new ReactRefreshWebpackPlugin({
+          overlay: {
+            sockIntegration: "whm",
+          },
+        }),
+      new LoadablePlugin(),
+    ].filter(Boolean),
+    externals: target === "node" ? [nodeExternals()] : [],
+    target,
+  });
+
+  return [createConfig("web"), createConfig("node")];
 };
