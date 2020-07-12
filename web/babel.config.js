@@ -1,3 +1,4 @@
+/* eslint-env node */
 function isWebTarget(caller) {
   return Boolean(caller && caller.target === "web");
 }
@@ -38,6 +39,13 @@ module.exports = (api) => {
         },
       ],
       web && !api.env("production") && "react-refresh/babel",
+      [
+        "babel-plugin-root-import",
+        {
+          rootPathSuffix: "./src/",
+          rootPathPrefix: "~/",
+        },
+      ],
     ].filter(Boolean),
   };
 };

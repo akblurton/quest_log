@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, StyleSheetManager } from "styled-components";
 import { Provider } from "react-redux";
 import store from "../store";
 
@@ -21,16 +21,18 @@ const Root = ({ Router: R }) => {
   );
 
   return (
-    <ThemeProvider theme={{ mode: dark ? "dark" : "light" }}>
-      <SkeletonTheme>
-        <Provider store={store}>
-          <DarkModeToggle dark={dark} onChange={setDark} />
-          <Style />
-          <Logo>Video Game Journal</Logo>
-          <Router Router={R} />
-        </Provider>
-      </SkeletonTheme>
-    </ThemeProvider>
+    <StyleSheetManager disableVendorPrefixes>
+      <ThemeProvider theme={{ mode: dark ? "dark" : "light" }}>
+        <SkeletonTheme>
+          <Provider store={store}>
+            <DarkModeToggle dark={dark} onChange={setDark} />
+            <Style />
+            <Logo>Video Game Journal</Logo>
+            <Router Router={R} />
+          </Provider>
+        </SkeletonTheme>
+      </ThemeProvider>
+    </StyleSheetManager>
   );
 };
 

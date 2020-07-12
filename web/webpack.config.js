@@ -18,17 +18,21 @@ module.exports = (env, options) => {
     name: target,
     optimization: {
       minimizer: [
-        new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
+        new TerserPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: target === "node",
+        }),
         new OptimizeCSSAssetsPlugin({}),
       ],
     },
     entry: {
-      main: [`~/${target}.js`],
+      main: [`./src/${target}.js`],
     },
     output: {
-      filename: devMode ? "[name].js" : "[name].js?[hash]",
+      filename: devMode ? "[name].js" : "[id].[hash].js",
       path: path.resolve(__dirname, "dist", target),
-      publicPath: `/dist/${target}/`,
+      publicPath: target === "web" ? "/static" : "/",
       ...(target === "web" ? {} : { libraryTarget: "commonjs2" }),
     },
     devtool: devMode || target === "node" ? "source-map" : undefined,
@@ -78,6 +82,7 @@ module.exports = (env, options) => {
               loader: "url-loader",
               options: {
                 limit: Math.pow(2, 10), // 1KB
+                publicPath: "/static/",
                 emitFile: target === "web",
               },
             },
@@ -90,7 +95,7 @@ module.exports = (env, options) => {
               loader: "url-loader",
               options: {
                 limit: Math.pow(2, 10), // 1KB
-                publicPath: "/dist/web/",
+                publicPath: "/static/",
                 emitFile: target === "web",
               },
             },
@@ -101,13 +106,15 @@ module.exports = (env, options) => {
     resolve: {
       modules: ["node_modules"],
       alias: {
-        "~": path.resolve(__dirname, "src"),
         "#": path.resolve(__dirname, "assets"),
       },
     },
     plugins: [
       new CaseSensitivePathsPlugin(),
-      new MiniCssExtractPlugin({ filename: "css/[name].css?[contenthash]" }),
+      new MiniCssExtractPlugin({
+        filename: "[name].[contenthash].css",
+        chunkFilename: "[id].[contenthash].css",
+      }),
       new webpack.EnvironmentPlugin({
         NODE_ENV: "development",
       }),
@@ -120,7 +127,9 @@ module.exports = (env, options) => {
             sockIntegration: "whm",
           },
         }),
-      new LoadablePlugin(),
+      new LoadablePlugin({
+        filename: ".loadable-stats.json",
+      }),
       new CleanWebpackPlugin({ verbose: true }),
     ].filter(Boolean),
     externals: target === "node" ? [nodeExternals()] : [],

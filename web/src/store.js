@@ -20,6 +20,7 @@ function _runSaga() {
 }
 _runSaga();
 
+/* global module */
 if (module.hot) {
   module.hot.accept("./reducer", () => store.replaceReducer(reducer));
   module.hot.accept("./saga", _runSaga);

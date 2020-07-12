@@ -30,6 +30,7 @@ game_journal-*.tar
 # this depending on your deployment strategy.
 /api/priv/static/
 /web/dist/
+/web/lib/
 
 # Cache files
 .eslintcache

@@ -62,6 +62,7 @@ const Picture = styled.div`
   }
 `;
 
+/* global require */
 const examples = require.context("#/img/examples", false, /\.webm|jpg$/);
 const opts = [];
 for (const file of examples.keys()) {
