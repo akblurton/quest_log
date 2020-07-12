@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { primary } from "style/theme";
+import { primary } from "~/style/theme";
 
 import Fallback from "./Fallback";
 import ErrorBoundary from "./ErrorBoundary";

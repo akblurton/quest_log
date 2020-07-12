@@ -20,7 +20,9 @@ async function start() {
     publicPath: "/dist/web",
     serverSideRender: true,
     writeToDisk(filePath) {
-      return /loadable-stats/.test(filePath);
+      return (
+        /loadable-stats/.test(filePath) || /dist(\/||\\)node/.test(filePath)
+      );
     },
   });
   const app = new Koa();
@@ -32,12 +34,14 @@ async function start() {
   app.use(async function devSSR(ctx) {
     const nodeExtractor = new ChunkExtractor({
       statsFile: nodeStats,
-      inputFileSystem: wpMiddleware.fileSystem,
     });
     const { default: App } = nodeExtractor.requireEntrypoint();
 
     const sheet = new ServerStyleSheet();
-    const webExtractor = new ChunkExtractor({ statsFile: webStats });
+    const webExtractor = new ChunkExtractor({
+      statsFile: webStats,
+      inputFileSystem: wpMiddleware.fileSystem,
+    });
     const jsx = webExtractor.collectChunks(
       sheet.collectStyles(<App Router={StaticRouter} />)
     );

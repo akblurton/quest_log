@@ -1,4 +1,3 @@
-/* global require */
 import { all, call } from "redux-saga/effects";
 
 const req = require.context("./features", true, /saga\.js$/);

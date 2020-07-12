@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import after from "../../hoc/after";
-import controllerAnimation from "static/loaders/controllers.svg";
-import * as theme from "style/theme";
+import controllerAnimation from "#/img/loaders/controllers.svg";
+import * as theme from "~/style/theme";
 const PageLoader = styled.div`
   position: fixed;
   top: 0;

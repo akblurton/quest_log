@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as theme from "style/theme";
+import * as theme from "~/style/theme";
 
 const Panel = styled.div`
   border-radius: 8px;

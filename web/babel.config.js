@@ -31,7 +31,10 @@ module.exports = (api) => {
         "babel-plugin-styled-components",
         {
           ssr: true,
-          displayName: false,
+          displayName: !api.env("production"),
+          minify: api.env("production"),
+          transpileTemplateLiterals: api.env("production"),
+          pure: true,
         },
       ],
       web && !api.env("production") && "react-refresh/babel",

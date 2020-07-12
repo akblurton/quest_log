@@ -1,4 +1,3 @@
-/* global module */
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import reducer from "./reducer";
 import saga from "./saga";

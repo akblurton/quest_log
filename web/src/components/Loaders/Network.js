@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import controllerAnimation from "static/loaders/controllers.svg";
-import * as theme from "style/theme";
-import useAnimationFrame from "hooks/animationFrame";
+import controllerAnimation from "#/img/loaders/controllers.svg";
+import * as theme from "~/style/theme";
+import useAnimationFrame from "~/hooks/animationFrame";
 
 const CIRC = 283;
 const MAX = CIRC * 0.75,

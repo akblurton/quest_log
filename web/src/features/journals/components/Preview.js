@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Panel from "components/Layout/Panel";
+import Panel from "~/components/Layout/Panel";
 import Skeleton from "react-loading-skeleton";
-import BlockLink from "components/UI/BlockLink";
+import BlockLink from "~/components/UI/BlockLink";
 
-import * as theme from "style/theme";
+import * as theme from "~/style/theme";
 
 const StyledPanel = styled(Panel)`
   /* height: 440px; */
@@ -62,8 +62,7 @@ const Picture = styled.div`
   }
 `;
 
-/* global require */
-const examples = require.context("static/examples", false, /\.webm|jpg$/);
+const examples = require.context("#/img/examples", false, /\.webm|jpg$/);
 const opts = [];
 for (const file of examples.keys()) {
   opts.push(examples(file).default);

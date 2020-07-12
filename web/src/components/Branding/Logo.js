@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import darkLogo from "static/logos/game_journal_dark.png";
-import lightLogo from "static/logos/game_journal_light.png";
+import darkLogo from "#/img/logos/game_journal_dark.png";
+import lightLogo from "#/img/logos/game_journal_light.png";
 
 const Logo = styled.h1`
   overflow: hidden;

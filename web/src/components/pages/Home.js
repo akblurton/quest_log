@@ -1,23 +1,23 @@
 import React from "react";
 import Title from "../Typography/Title";
-import Preview from "features/journals/components/Preview";
-import Grid from "components/Layout/Grid";
-import GlobalAction from "components/UI/GlobalAction";
+import Preview from "~/features/journals/components/Preview";
+import Grid from "~/components/Layout/Grid";
+import GlobalAction from "~/components/UI/GlobalAction";
 
 import styled, { keyframes } from "styled-components";
 
-import healer_f from "static/sprites/cropped/healer_f.png";
-import healer_m from "static/sprites/cropped/healer_m.png";
-import mage_m from "static/sprites/cropped/mage_m.png";
-import mage_f from "static/sprites/cropped/mage_f.png";
-import ninja_f from "static/sprites/cropped/ninja_f.png";
-import ninja_m from "static/sprites/cropped/ninja_m.png";
-import ranger_f from "static/sprites/cropped/ranger_f.png";
-import ranger_m from "static/sprites/cropped/ranger_m.png";
-import townfolk1_m from "static/sprites/cropped/townfolk1_m.png";
-import townfolk1_f from "static/sprites/cropped/townfolk1_f.png";
-import warrior_m from "static/sprites/cropped/warrior_m.png";
-import warrior_f from "static/sprites/cropped/warrior_f.png";
+import healer_f from "#/img/sprites/cropped/healer_f.png";
+import healer_m from "#/img/sprites/cropped/healer_m.png";
+import mage_m from "#/img/sprites/cropped/mage_m.png";
+import mage_f from "#/img/sprites/cropped/mage_f.png";
+import ninja_f from "#/img/sprites/cropped/ninja_f.png";
+import ninja_m from "#/img/sprites/cropped/ninja_m.png";
+import ranger_f from "#/img/sprites/cropped/ranger_f.png";
+import ranger_m from "#/img/sprites/cropped/ranger_m.png";
+import townfolk1_m from "#/img/sprites/cropped/townfolk1_m.png";
+import townfolk1_f from "#/img/sprites/cropped/townfolk1_f.png";
+import warrior_m from "#/img/sprites/cropped/warrior_m.png";
+import warrior_f from "#/img/sprites/cropped/warrior_f.png";
 
 const animate = keyframes`
   0% {

@@ -9,6 +9,7 @@ const nodeExternals = require("webpack-node-externals");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env, options) => {
   const devMode = options.mode !== "production";
@@ -22,7 +23,7 @@ module.exports = (env, options) => {
       ],
     },
     entry: {
-      main: [`./js/${target}.js`],
+      main: [`~/${target}.js`],
     },
     output: {
       filename: devMode ? "[name].js" : "[name].js?[hash]",
@@ -76,7 +77,8 @@ module.exports = (env, options) => {
             {
               loader: "url-loader",
               options: {
-                limit: Math.pow(2, 13), // 8KB
+                limit: Math.pow(2, 10), // 1KB
+                emitFile: target === "web",
               },
             },
           ],
@@ -87,7 +89,7 @@ module.exports = (env, options) => {
             {
               loader: "url-loader",
               options: {
-                limit: Math.pow(2, 13), // 8KB
+                limit: Math.pow(2, 10), // 1KB
                 publicPath: "/dist/web/",
                 emitFile: target === "web",
               },
@@ -97,7 +99,11 @@ module.exports = (env, options) => {
       ],
     },
     resolve: {
-      modules: ["node_modules", path.resolve(__dirname, "js"), __dirname],
+      modules: ["node_modules"],
+      alias: {
+        "~": path.resolve(__dirname, "src"),
+        "#": path.resolve(__dirname, "assets"),
+      },
     },
     plugins: [
       new CaseSensitivePathsPlugin(),
@@ -106,7 +112,7 @@ module.exports = (env, options) => {
         NODE_ENV: "development",
       }),
       target === "web" && new webpack.HotModuleReplacementPlugin(),
-      devMode && new DashboardPlugin({ port: 3001 }),
+      devMode && target === "web" && new DashboardPlugin({ port: 3001 }),
       devMode &&
         target === "web" &&
         new ReactRefreshWebpackPlugin({
@@ -115,6 +121,7 @@ module.exports = (env, options) => {
           },
         }),
       new LoadablePlugin(),
+      new CleanWebpackPlugin({ verbose: true }),
     ].filter(Boolean),
     externals: target === "node" ? [nodeExternals()] : [],
     target,

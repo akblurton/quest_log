@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Sun, Moon } from "react-feather";
-import * as theme from "style/theme";
+import * as theme from "~/style/theme";
 
 const Button = styled.button`
   width: 44px;

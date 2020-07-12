@@ -10,7 +10,7 @@ import Logo from "./Branding/Logo";
 import DarkModeToggle from "./UI/DarkModeToggle";
 import Router from "./Router";
 
-import useLocalStorage from "hooks/localStorage";
+import useLocalStorage from "~/hooks/localStorage";
 
 const Root = ({ Router: R }) => {
   const [dark, setDark] = useLocalStorage(
