@@ -118,7 +118,7 @@ module.exports = (env, options) => {
       new webpack.EnvironmentPlugin({
         NODE_ENV: "development",
       }),
-      target === "web" && new webpack.HotModuleReplacementPlugin(),
+      devMode && target === "web" && new webpack.HotModuleReplacementPlugin(),
       devMode && target === "web" && new DashboardPlugin({ port: 3001 }),
       devMode &&
         target === "web" &&
