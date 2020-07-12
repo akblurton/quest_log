@@ -21,13 +21,16 @@ module.exports = (env, options) => {
         new TerserPlugin({
           cache: true,
           parallel: true,
-          sourceMap: target === "node",
+          sourceMap: true,
         }),
         new OptimizeCSSAssetsPlugin({}),
       ],
     },
     entry: {
-      main: [`./src/${target}.js`],
+      main: [
+        target === "web" && devMode && "webpack-hot-middleware/client",
+        `./src/${target}.js`,
+      ].filter(Boolean),
     },
     output: {
       filename: devMode ? "[name].js" : "[id].[hash].js",
@@ -35,7 +38,8 @@ module.exports = (env, options) => {
       publicPath: target === "web" ? "/static" : "/",
       ...(target === "web" ? {} : { libraryTarget: "commonjs2" }),
     },
-    devtool: devMode || target === "node" ? "source-map" : undefined,
+    devtool:
+      devMode && target === "web" ? "cheap-eval-source-map" : "source-map",
     module: {
       rules: [
         {

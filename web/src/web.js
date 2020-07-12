@@ -1,4 +1,3 @@
-import "webpack-hot-middleware/client";
 import "reset.css/reset.css";
 import ReactDOM from "react-dom";
 import React from "react";
