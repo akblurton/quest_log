@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+// Adapted from https://github.com/joshwcomeau/dark-mode-minimal/blob/e08c874accdbfc2237054cf059571c8c87d25a83/src/components/DarkToggle.js
+import React, { useContext, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { ThemeContext } from "~/style/ThemeProvider";
 
 import { Sun, Moon } from "react-feather";
-import * as theme from "~/style/theme";
 
 const Button = styled.button`
   width: 44px;
@@ -18,8 +19,7 @@ const Button = styled.button`
   padding: 10px;
 
   svg {
-    /* fill: ${theme.foreground}; */
-    stroke: ${theme.foreground};
+    stroke: var(--color-foreground);
     width: 24px;
     height: 24px;
   }
@@ -29,8 +29,8 @@ const Tooltip = styled.span`
   position: absolute;
   right: 100%;
   top: 50%;
-  background: ${theme.background};
-  color: ${theme.foreground};
+  background: var(--color-background);
+  color: var(--color-foreground);
   white-space: nowrap;
   font-size: 13px;
   font-weight: bold;
@@ -48,11 +48,19 @@ const Tooltip = styled.span`
   }
 `;
 
-const DarkModeToggle = ({ dark, onChange }) => {
-  const onToggle = useCallback(() => onChange((d) => !d), [onChange]);
+const DarkModeToggle = () => {
+  const { colorMode, setColorMode } = useContext(ThemeContext);
+  const onToggle = useCallback(() => {
+    setColorMode(colorMode === "light" ? "dark" : "light");
+  }, [colorMode]);
+
+  if (!colorMode) {
+    return null;
+  }
+
   return (
-    <Button darkMode={dark} onClick={onToggle}>
-      {dark ? <Moon /> : <Sun />}
+    <Button onClick={onToggle}>
+      {colorMode === "dark" ? <Moon /> : <Sun />}
       <Tooltip>Switch Color Scheme</Tooltip>
     </Button>
   );

@@ -4,8 +4,6 @@ import Panel from "~/components/Layout/Panel";
 import Skeleton from "react-loading-skeleton";
 import BlockLink from "~/components/UI/BlockLink";
 
-import * as theme from "~/style/theme";
-
 const StyledPanel = styled(Panel)`
   /* height: 440px; */
   display: flex;
@@ -19,7 +17,7 @@ const StyledPanel = styled(Panel)`
     font-size: 13px;
     display: block;
     margin-bottom: 16px;
-    color: ${theme.secondary};
+    color: var(--color-secondary);
   }
 
   & p {
@@ -46,7 +44,7 @@ const Picture = styled.div`
   min-height: 0;
   box-sizing: content-box;
   padding-top: 70%;
-  background: ${theme.skeleton};
+  background: var(--color-skeleton);
   margin-bottom: 16px;
   position: relative;
 

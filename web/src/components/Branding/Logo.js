@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import darkLogo from "#/img/logos/game_journal_dark.png";
-import lightLogo from "#/img/logos/game_journal_light.png";
 
 const Logo = styled.h1`
   overflow: hidden;
@@ -9,8 +7,7 @@ const Logo = styled.h1`
   text-indent: -9999px;
   background: no-repeat center left / contain;
   /* stylelint-disable */
-  background-image: url("${({ theme }) =>
-    theme.mode === "dark" ? darkLogo : lightLogo}");
+  background-image: var(--image-logo);
   /* stylelint-enable */
 `;
 

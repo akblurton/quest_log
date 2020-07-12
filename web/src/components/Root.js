@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider, StyleSheetManager } from "styled-components";
+import { StyleSheetManager } from "styled-components";
 import { Provider } from "react-redux";
 import store from "../store";
 
 import Style from "../style/css";
+import { ThemeProvider } from "../style/ThemeProvider";
 import SkeletonTheme from "../style/Skeleton";
 import Logo from "./Branding/Logo";
 import DarkModeToggle from "./UI/DarkModeToggle";
@@ -22,7 +23,7 @@ const Root = ({ Router: R }) => {
 
   return (
     <StyleSheetManager disableVendorPrefixes>
-      <ThemeProvider theme={{ mode: dark ? "dark" : "light" }}>
+      <ThemeProvider>
         <SkeletonTheme>
           <Provider store={store}>
             <DarkModeToggle dark={dark} onChange={setDark} />

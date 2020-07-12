@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import after from "../../hoc/after";
 import controllerAnimation from "#/img/loaders/controllers.svg";
-import * as theme from "~/style/theme";
 const PageLoader = styled.div`
   position: fixed;
   top: 0;
@@ -15,7 +14,7 @@ const PageLoader = styled.div`
   pointer-events: none;
   &::after {
     content: "";
-    background: url("${controllerAnimation}") ${theme.secondary} bottom  repeat;
+    background: url("${controllerAnimation}") var(--color-secondary) bottom  repeat;
     display: block;
     width: 24vmin;
     height: 24vmin;

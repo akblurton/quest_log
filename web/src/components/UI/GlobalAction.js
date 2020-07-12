@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import * as theme from "~/style/theme";
 import PropTypes from "prop-types";
 
 import { Plus } from "react-feather";
@@ -16,8 +15,8 @@ const Button = styled.button`
   right: 16px;
   height: 64px;
   width: 64px;
-  background: ${theme.primary};
-  color: ${theme.foreground};
+  background: var(--color-primary);
+  color: var(--color-foreground);
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border: 0;

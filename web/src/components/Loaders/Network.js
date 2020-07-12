@@ -2,14 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import controllerAnimation from "#/img/loaders/controllers.svg";
-import * as theme from "~/style/theme";
 import useAnimationFrame from "~/hooks/animationFrame";
 
 const CIRC = 283;
 const MAX = CIRC * 0.75,
   OFF_DURATION = 240;
 const LoadingBG = styled.div`
-  background: url("${controllerAnimation}") ${theme.secondary} center / 100% repeat;
+  background: url("${controllerAnimation}") var(--color-secondary) center / 100% repeat;
   display: block;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) inset;
   border-radius: 50%;
@@ -42,7 +41,7 @@ const Circle = styled.svg`
   position: absolute;
   top: 0;
   left: 0;
-  stroke: ${theme.primary};
+  stroke: var(--color-primary);
   stroke-linecap: butt;
   stroke-dasharray: 1 282;
   stroke-width: 10px;

@@ -54,7 +54,7 @@ async function start() {
     const nodeExtractor = new ChunkExtractor({
       statsFile: nodeStats,
     });
-    const { default: App } = nodeExtractor.requireEntrypoint();
+    const { default: App, themeHydration } = nodeExtractor.requireEntrypoint();
 
     const sheet = new ServerStyleSheet();
     const webExtractor = new ChunkExtractor({
@@ -79,6 +79,7 @@ async function start() {
             ${sheet.getStyleTags()}
           </head>
           <body>
+            <script>${themeHydration}</script>
             <div id="main">${html}</div>
             ${webExtractor.getScriptTags()}
           </body>
