@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :quest_log, QuestLog.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "game_journal_dev",
-  hostname: "localhost",
+  username: System.get_env("DATABASE_USERNAME", "postgres"),
+  password: System.get_env("DATABASE_PASSWORD", "postgres"),
+  database: System.get_env("DATABASE_NAME", "quest_log_dev"),
+  hostname: System.get_env("DATABASE_HOST", "localhost"),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -20,13 +20,7 @@ config :quest_log, QuestLogWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [
-    npm: [
-      "run",
-      "watch",
-      cd: Path.expand("../assets", __DIR__)
-    ]
-  ]
+  watchers: []
 
 # ## SSL Support
 #
