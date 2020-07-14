@@ -1,0 +1,8 @@
+deps
+_build
+.elixir_ls
+Dockerfile
+.eslintcache
+.stylelintcache
+.env
+.git

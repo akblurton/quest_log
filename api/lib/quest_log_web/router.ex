@@ -2,16 +2,12 @@ defmodule QuestLogWeb.Router do
   use QuestLogWeb, :router
 
   pipeline :api do
-    plug :accepts, ["json"]
-  end
-
-  pipeline :frontend do
-    plug Plug.Static, from: {:quest_log, "priv/static"}, at: "/static"
+    plug(:accepts, ["json"])
   end
 
   scope "/api", QuestLogWeb do
-    pipe_through :api
-    resources "/games", GameController, except: [:new, :edit]
+    pipe_through(:api)
+    resources("/games", GameController, except: [:new, :edit])
   end
 
   # Enables LiveDashboard only for development
@@ -25,13 +21,8 @@ defmodule QuestLogWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through [:fetch_session, :protect_from_forgery]
-      live_dashboard "/dashboard", metrics: QuestLogWeb.Telemetry
+      pipe_through([:fetch_session, :protect_from_forgery])
+      live_dashboard("/dashboard", metrics: QuestLogWeb.Telemetry)
     end
-  end
-
-  scope "/", QuestLogWeb do
-    pipe_through :frontend
-    get "/*path", SpaController, :index
   end
 end
