@@ -21,5 +21,11 @@ defmodule QuestLogWeb.Schema.Types.JournalTypes do
     field :entries, list_of(:entry) do
       resolve(&Journal.list_entries/3)
     end
+
+    @desc "Fetch a single journal entry"
+    field :entry_by_id, :entry do
+      arg(:id, non_null(:id))
+      resolve(&Journal.fetch_entry/3)
+    end
   end
 end

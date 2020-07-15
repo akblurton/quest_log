@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Panel from "~/components/Layout/Panel";
 import Skeleton from "react-loading-skeleton";
 import BlockLink from "~/components/UI/BlockLink";
+
+import { useQuery } from "urql";
+import { GetEntry } from "~/features/journals/queries.graphql";
 
 const StyledPanel = styled(Panel)`
   /* height: 440px; */
@@ -77,15 +81,16 @@ function getRandomImage() {
   return media;
 }
 
-const Preview = () => {
-  const [loaded, setLoaded] = useState(false);
-  const [img] = useState(getRandomImage);
-  useEffect(() => {
-    const rand = Math.floor(300 + Math.random() * 2300);
-    const id = setTimeout(setLoaded, rand, true);
-    return () => clearTimeout(id);
-  }, []);
+const Preview = ({ id }) => {
+  const [{ fetching, data }] = useQuery({
+    query: GetEntry,
+    variables: { id },
+  });
+  // title, summary, date,
+  const [img, setImage] = useState(null);
+  const { title, summary, insertedAt: date } = (data || {}).entryById || {};
   const isVideo = /\.webm/.test(img);
+  useEffect(() => setImage(getRandomImage), []);
   return (
     <StyledPanel>
       <Picture>
@@ -101,20 +106,24 @@ const Preview = () => {
           <img src={img} />
         )}
       </Picture>
-      <h2>{loaded ? "Title" : <Skeleton width="50%" />}</h2>
-      <time>{loaded ? "10th August 2020" : <Skeleton width="30%" />}</time>
-      <p>
-        {loaded ? (
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ex consequatur excepturi animi earum vero. Laboriosam, eum ab! Incidunt ratione iure earum repellat nulla doloremque molestias soluta placeat quo, a iusto asperiores magni illum sapiente dolorum ut harum corporis? Facilis!"
+      <h2>{!fetching ? title : <Skeleton width="50%" />}</h2>
+      <time>
+        {!fetching ? (
+          new Intl.DateTimeFormat("default").format(new Date(date))
         ) : (
-          <Skeleton count={5} />
+          <Skeleton width="30%" />
         )}
-      </p>
-      <BlockLink to="/">
-        {loaded ? "Read More" : <Skeleton width={"15%"} />}
+      </time>
+      <p>{!fetching ? summary : <Skeleton count={5} />}</p>
+      <BlockLink to="/settings">
+        {!fetching ? "Read More" : <Skeleton width={"15%"} />}
       </BlockLink>
     </StyledPanel>
   );
+};
+
+Preview.propTypes = {
+  id: PropTypes.number,
 };
 
 export default Preview;

@@ -1,11 +1,14 @@
 require("source-map-support").install();
-const { env, ...options } = require("yargs").argv;
+require("dotenv").config();
 
+import "isomorphic-fetch";
+const { env, ...options } = require("yargs").argv;
 import path from "path";
 import Koa from "koa";
 import e2k from "express-to-koa";
 import { ChunkExtractor } from "@loadable/server";
 import React from "react";
+import prepass from "react-ssr-prepass";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { ServerStyleSheet } from "styled-components";
@@ -18,6 +21,13 @@ async function start() {
   const app = new Koa();
   app.use(koaLogger());
   if (process.env.NODE_ENV === "development") {
+    const proxy = require("koa-proxy");
+    app.use(
+      proxy({
+        host: "http://localhost:4000",
+        match: /^\/api/,
+      })
+    );
     const webpack = require("webpack");
     const webpackConfig = require("../webpack.config.js");
     const middleware = require("webpack-dev-middleware");
@@ -54,17 +64,27 @@ async function start() {
     const nodeExtractor = new ChunkExtractor({
       statsFile: nodeStats,
     });
-    const { default: App, themeHydration } = nodeExtractor.requireEntrypoint();
+    const {
+      default: App,
+      graphql,
+      themeHydration,
+    } = nodeExtractor.requireEntrypoint();
 
     const sheet = new ServerStyleSheet();
     const webExtractor = new ChunkExtractor({
       statsFile: webStats,
     });
-    const jsx = webExtractor.collectChunks(
-      sheet.collectStyles(<App Router={StaticRouter} />)
-    );
+
+    const element = <App Router={StaticRouter} url={ctx.URL.pathname} />;
+    await prepass(webExtractor.collectChunks(sheet.collectStyles(element)));
+
+    const qlData = Buffer.from(
+      JSON.stringify(graphql.extractData()),
+      "utf-8"
+    ).toString("base64");
+    const jsx = element;
     try {
-      const html = renderToString(jsx);
+      const html = renderToString(webExtractor.collectChunks(jsx));
       ctx.type = "text/html";
       ctx.body = `
         <!DOCTYPE html>
@@ -80,6 +100,7 @@ async function start() {
           </head>
           <body>
             <script>${themeHydration}</script>
+            <script>window.__URQL_DATA__ = "${qlData}"</script>
             <div id="main">${html}</div>
             ${webExtractor.getScriptTags()}
           </body>

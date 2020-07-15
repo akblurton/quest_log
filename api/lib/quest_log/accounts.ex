@@ -6,6 +6,7 @@ defmodule QuestLog.Accounts do
   import Ecto.Query, warn: false
   alias QuestLog.Repo
   alias QuestLog.Accounts.{User, Guardian}
+  require Logger
 
   def authenticate_user(email, plain_text_password) do
     query = from u in User, where: u.email == ^email
@@ -139,7 +140,8 @@ defmodule QuestLog.Accounts do
     Dataloader.Ecto.new(Repo, query: &query/2)
   end
 
-  def query(queryable, _params) do
+  def query(queryable, params) do
+    Logger.info("Queryable params: " <> inspect(params))
     queryable
   end
 end

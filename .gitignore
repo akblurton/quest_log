@@ -38,3 +38,5 @@ game_journal-*.tar
 
 # yarn/npm
 yarn-error.log
+
+.env

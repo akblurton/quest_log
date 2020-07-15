@@ -19,14 +19,14 @@ const Settings = loadable(() => import("./pages/Settings"), {
   fallback: <PageLoader />,
 });
 
-const MyRouter = ({ Router = BrowserRouter }) => {
+const MyRouter = ({ Router = BrowserRouter, url }) => {
   const [loading, setLoading] = useState(false);
   return (
     <>
       <button onClick={() => setLoading((l) => !l)}>TOGGLE LOAD</button>
       <NetworkLoader on={loading} />
       <ErrorBoundary>
-        <Router>
+        <Router location={url}>
           <Switch>
             <Route path="/new">
               <Compose />
@@ -34,9 +34,7 @@ const MyRouter = ({ Router = BrowserRouter }) => {
             <Route path="/read">
               <Read />
             </Route>
-            <Route path="/settings">
-              <Settings />
-            </Route>
+            <Route path="/settings" component={Settings} />
             <Route path="*">
               <Home />
             </Route>
@@ -49,6 +47,7 @@ const MyRouter = ({ Router = BrowserRouter }) => {
 
 MyRouter.propTypes = {
   Router: PropTypes.func,
+  url: PropTypes.string,
 };
 
 export default MyRouter;

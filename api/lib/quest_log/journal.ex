@@ -12,6 +12,10 @@ defmodule QuestLog.Journal do
     Entry |> Repo.all()
   end
 
+  def fetch_entry(id) do
+    Entry |> Repo.get(id)
+  end
+
   def data() do
     Dataloader.Ecto.new(Repo, query: &query/2)
   end
