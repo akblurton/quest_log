@@ -26,9 +26,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :quest_log, MyApp.Guardian,
+config :quest_log, QuestLog.Accounts.Guardian,
   issuer: "quest_log",
-  secret_key: "5Msf7nJjLq2ot98Wd/e8OCYjZG+6ttgnZtEBJhlERMKQpb+YDogOApeFXMup8ggR"
+  secret_key: "5Msf7nJjLq2ot98Wd/e8OCYjZG+6ttgnZtEBJhlERMKQpb+YDogOApeFXMup8ggR",
+  verify_module: Guardian.JWT
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

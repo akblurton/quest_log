@@ -6,9 +6,8 @@ defmodule QuestLog.Journal.Entry do
     field :summary, :string
     field :title, :string
     field :whats_next, :string
-    field :user_id, :id
-    field :game_id, :id
 
+    belongs_to :user, QuestLog.Accounts.User
     timestamps()
   end
 
@@ -16,6 +15,7 @@ defmodule QuestLog.Journal.Entry do
   def changeset(entry, attrs) do
     entry
     |> cast(attrs, [:title, :summary, :whats_next])
+    |> cast_assoc(:user)
     |> validate_required([:title, :summary, :whats_next])
   end
 end

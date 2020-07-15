@@ -46,7 +46,8 @@ defmodule QuestLog.MixProject do
       {:guardian, "~> 2.0"},
       {:argon2_elixir, "~> 2.0"},
       {:absinthe, "~> 1.5"},
-      {:absinthe_plug, "~> 1.5"}
+      {:absinthe_plug, "~> 1.5"},
+      {:dataloader, "~> 1.0.0"}
     ]
   end
 

@@ -5,7 +5,40 @@ defmodule QuestLog.Accounts do
 
   import Ecto.Query, warn: false
   alias QuestLog.Repo
-  alias QuestLog.Accounts.User
+  alias QuestLog.Accounts.{User, Guardian}
+
+  def authenticate_user(email, plain_text_password) do
+    query = from u in User, where: u.email == ^email
+
+    case Repo.one(query) do
+      nil ->
+        Argon2.no_user_verify()
+        {:error, :invalid_credentials}
+
+      user ->
+        if Argon2.verify_pass(plain_text_password, user.password) do
+          {:ok, user}
+        else
+          {:error, :invalid_credentials}
+        end
+    end
+  end
+
+  def login(email, password) do
+    with {:ok, user} <- authenticate_user(email, password),
+         {:ok, token, _} <- Guardian.access_token(user) do
+      {:ok, token}
+    else
+      _ -> {:error, :unauthorized}
+    end
+  end
+
+  def verify(token) do
+    case Guardian.resource_from_token(token) do
+      {:ok, user, _claims} -> {:ok, user}
+      error -> error
+    end
+  end
 
   @doc """
   Returns the list of users.
