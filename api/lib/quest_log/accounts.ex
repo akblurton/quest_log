@@ -26,8 +26,9 @@ defmodule QuestLog.Accounts do
 
   def login(email, password) do
     with {:ok, user} <- authenticate_user(email, password),
-         {:ok, token, _} <- Guardian.access_token(user) do
-      {:ok, token}
+         {:ok, access_token, _} <- Guardian.access_token(user),
+         {:ok, refresh_token, _} <- Guardian.refresh_token(user) do
+      {:ok, access_token, refresh_token}
     else
       _ -> {:error, :unauthorized}
     end

@@ -3,8 +3,11 @@ defmodule QuestLogWeb.Schema.Resolvers.Accounts do
 
   def login(_parent, args, _context) do
     case Accounts.login(args.email, args.password) do
-      {:ok, token} -> {:ok, %{token: token}}
-      error -> error
+      {:ok, access_token, refresh_token} ->
+        {:ok, %{access_token: access_token, refresh_token: refresh_token}}
+
+      error ->
+        error
     end
   end
 

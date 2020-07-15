@@ -9,7 +9,8 @@ defmodule QuestLogWeb.Schema.ContentTypes do
   end
 
   object :session do
-    field :token, :string
+    field :access_token, :string
+    field :refresh_token, :string
   end
 
   object :entry do

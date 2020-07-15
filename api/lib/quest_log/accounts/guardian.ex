@@ -24,16 +24,10 @@ defmodule QuestLog.Accounts.Guardian do
   end
 
   def access_token(%User{} = resource, claims \\ %{}) do
-    case refresh_token(resource) do
-      {:ok, refresh, _} ->
-        encode_and_sign(resource, claims |> Map.put(:refresh_token, refresh),
-          token_type: "access",
-          ttl: {15, :hours}
-        )
-
-      error ->
-        error
-    end
+    encode_and_sign(resource, claims,
+      token_type: "access",
+      ttl: {15, :hours}
+    )
   end
 
   def refresh_token(%User{} = resource, claims \\ %{}) do
