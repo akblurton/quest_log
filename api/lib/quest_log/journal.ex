@@ -3,6 +3,7 @@ defmodule QuestLog.Journal do
   The Journal context.
   """
 
+  require Logger
   import Ecto.Query, warn: false
   alias QuestLog.Repo
   alias QuestLog.Journal.Entry
