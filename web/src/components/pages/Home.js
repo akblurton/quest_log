@@ -17,7 +17,9 @@ const Home = () => {
       <Title>I&apos;m home</Title>
       <Grid>
         {!fetching &&
-          data.entries.map((entry) => <Preview key={entry.id} id={entry.id} />)}
+          ((data || {}).entries || []).map((entry) => (
+            <Preview key={entry.id} id={entry.id} />
+          ))}
       </Grid>
       <GlobalAction icon="add" />
     </>
