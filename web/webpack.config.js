@@ -35,7 +35,7 @@ module.exports = (env, options) => {
     output: {
       filename: devMode ? "[name].js" : "[id].[hash].js",
       path: path.resolve(__dirname, "dist", target),
-      publicPath: target === "web" ? "/static" : "/",
+      publicPath: target === "web" ? "/static/" : "/",
       ...(target === "web" ? {} : { libraryTarget: "commonjs2" }),
     },
     devtool:
