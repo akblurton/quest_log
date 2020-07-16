@@ -13,6 +13,7 @@
     "@loadable/component": "^5.13.1",
     "@loadable/server": "^5.13.1",
     "@reduxjs/toolkit": "^1.4.0",
+    "@urql/devtools": "^2.0.2",
     "@urql/exchange-graphcache": "^3.0.1",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
