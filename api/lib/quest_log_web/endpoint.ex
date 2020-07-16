@@ -7,24 +7,14 @@ defmodule QuestLogWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_game_journal_key",
-    signing_salt: "tO7jHToO"
+    signing_salt: "tO7jHToO",
+    same_site: "Lax",
+    http_only: true
   ]
 
   socket "/socket", QuestLogWeb.UserSocket,
     websocket: true,
     longpoll: false
-
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
-
-  # Serve at "/" the static files from "priv/static" directory.
-  #
-  # You should set gzip to true if you are running phx.digest
-  # when deploying your static files in production.
-  plug Plug.Static,
-    at: "/",
-    from: :quest_log,
-    gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
