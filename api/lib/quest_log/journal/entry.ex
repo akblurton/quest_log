@@ -8,6 +8,7 @@ defmodule QuestLog.Journal.Entry do
     field :whats_next, :string
 
     belongs_to :user, QuestLog.Accounts.User
+    belongs_to :game, QuestLog.Library.Game
     timestamps()
   end
 

@@ -1,10 +1,10 @@
 defmodule QuestLogWeb.Schema.Types.JournalTypes do
   use Absinthe.Schema.Notation
   import Absinthe.Resolution.Helpers, only: [dataloader: 1]
-  alias QuestLog.Accounts
+  alias QuestLog.{Accounts, Library}
   alias QuestLogWeb.Schema.Resolvers.Journal
 
-  import_types(Absinthe.Type.Custom)
+  # import_types(QuestLogWeb.Schema.Types.LibraryTypes)
 
   object :entry do
     field :id, :id
@@ -14,6 +14,7 @@ defmodule QuestLogWeb.Schema.Types.JournalTypes do
     field :inserted_at, :naive_datetime
     field :updated_at, :naive_datetime
     field :user, :user, resolve: dataloader(Accounts)
+    field :game, :game, resolve: dataloader(Library)
   end
 
   object :journal_queries do
