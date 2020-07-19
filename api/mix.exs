@@ -47,7 +47,9 @@ defmodule QuestLog.MixProject do
       {:argon2_elixir, "~> 2.0"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
-      {:dataloader, "~> 1.0.0"}
+      {:dataloader, "~> 1.0.0"},
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
+      {:html_sanitize_ex, "~> 1.3.0-rc3"}
     ]
   end
 
